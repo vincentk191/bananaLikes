@@ -1,0 +1,80 @@
+doctype html
+html
+   head
+      title
+      link(rel='stylesheet', type='text/css', href='style.css')
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+   body
+      h1 Gallery
+      h2
+         input#user(type='text', name='username', placeholder='username', autocomplete='off')
+         p#userId
+      .slideShow
+         ul
+            li.gallery
+               img.galleryImg(
+                  src='images/1.jpg'
+               )
+               p The Lonely Banana:
+               button(type='submit', value='Like', name='1')
+                  <p>Like #{counter[0]}</p>
+            li.gallery
+               img.galleryImg(
+                  src='images/2.jpg'
+               )
+               p Not so Lonely Banana:
+               button(type='submit', value='Like', name='2')
+                  <p>Like #{counter[1]}</p>
+            li.gallery
+               img.galleryImg(
+                  src='images/3.jpg'
+               )
+               p Bananas:
+               button(type='submit', value='Like', name='3')
+                  <p>Like #{counter[2]}</p>
+            li.gallery
+               img.galleryImg(
+                  src='images/4.jpg'
+               )
+               p Too many Bananas:
+               button(type='submit', value='Like', name='4')
+                  <p>Like #{counter[3]}</p>
+      .display
+         ul
+            li
+               img#big
+      .footer
+      script.
+         $(document).ready(function() {
+            /*Loading Users likes*/
+            $('input').keyup(function(){
+               setTimeout(function () {
+                  const login = $('input#user').val();
+                  $.get(`/loadUser`, { input: login }, data => {
+                     if(data.user !== undefined){
+                        $('#userId').html(`<p> ${id}</p>`)
+                     }
+                  });   
+               }, 300);
+            })
+            /*Expanding image*/
+            $('.galleryImg').click(function(){
+               let ginger = $(this).attr("src");
+               $('#big').attr('src', ginger).hide().show(300)
+               $('#big').attr('width', '300px');
+               $('#big').attr('height', '280px');
+            });
+            
+            /*Like images*/
+            $('button').click(function(){
+               let jasmine = $(this).attr("name");
+               let newButton = $(this);
+               let greentea = $(this).text();
+               const user = $('input').val();
+               $.post('/liked', {imageLiked: jasmine, username: user}, function(data) {
+                  let i = jasmine - 1;
+                  $(newButton).html(`<p>Like ${data.counter[i]}</p>`)
+               });
+            });
+         }); 
+   

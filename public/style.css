@@ -1,0 +1,57 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+
+body {
+   background-image: url(images/background.jpg);
+}
+
+.gallery img {
+   display: flex;
+   width: 60px;
+   height: 40px;
+   padding: 1px;
+   background-color: black;
+}
+
+input {
+   background-color: transparent;
+   border-color: grey;
+}
+
+ul {
+   list-style: none;
+   display: flex;
+   align-items: baseline;
+}
+
+.display ul {
+   /*align-items: stretch;*/
+}
+
+p {
+   font-family: Arial;
+   text-align: justify;
+   padding: 8px;
+}
+
+h1 {
+   font-family: sans-serif;
+   text-align: center;
+   background: black;
+   padding-top: 75px;
+   color: yellow;
+}
+
+li {
+   text-align: justify;
+}
+
+#big {
+
+}
+
+a {
+   text-decoration: none;
+}
